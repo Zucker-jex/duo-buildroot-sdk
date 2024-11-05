@@ -1,0 +1,20 @@
+file(GLOB _SOURCES "src/${RUN_ARCH}/*.c")
+
+include_directories(include)
+if (BOARD MATCHES "milkv-duos")
+	list(APPEND _SOURCES "led_control/milkv_duos_io.c")
+elseif (BOARD MATCHES "milkv-duo256m")
+	list(APPEND _SOURCES "led_control/milkv_duo256m_io.c")
+elseif (BOARD MATCHES "milkv-duo")
+	list(APPEND _SOURCES "led_control/milkv_duo_io.c")
+endif()
+include_directories(${CMAKE_INSTALL_INC_PREFIX}/arch)
+include_directories(${CMAKE_INSTALL_INC_PREFIX}/common)
+include_directories(${CMAKE_INSTALL_INC_PREFIX}/kernel)
+include_directories(${CMAKE_INSTALL_INC_PREFIX}/driver/spinlock)
+include_directories(${CMAKE_INSTALL_INC_PREFIX}/driver/rtos_cmdqu)
+include_directories(${CMAKE_INSTALL_INC_PREFIX}/hal/config)
+
+add_library(comm STATIC ${_SOURCES})
+install(TARGETS comm DESTINATION lib)
+
