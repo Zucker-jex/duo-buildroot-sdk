@@ -142,7 +142,7 @@ function milkv_pack_sd()
   [ ! -d out ] && mkdir out
 
   img_in="${OUTPUT_DIR}/${MILKV_BOARD}.img"
-  img_out="${MILKV_BOARD}-`date +%Y%m%d-%H%M`.img"
+  img_out="${MILKV_BOARD}-arduino-`date +%Y%m%d-%H%M`.img"
 
   if [ -f "${img_in}" ]; then
     mv ${img_in} out/${img_out}
